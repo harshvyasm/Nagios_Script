@@ -29,3 +29,12 @@ echo "Email Addr: "
 read username
 sudo sed -i "s/nagios\@localhost/$username/g" /usr/local/nagios/etc/objects/contacts.cfg
 
+#Fire up the web interface installer
+sudo make install-webconf
+
+#need a user account to start using the Nagios web interface, so naturally, you must create a user account first.
+sudo htpasswd -c /usr/local/nagios/etc/htpasswd.users nagios
+sudo a2enmod cgi
+
+#you can restart the Apache Servers.
+sudo systemctl restart apache2
